@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "_09_WorkerService.Windows": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
