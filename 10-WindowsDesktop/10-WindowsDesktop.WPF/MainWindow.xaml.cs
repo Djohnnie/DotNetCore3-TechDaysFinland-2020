@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,18 +15,20 @@ namespace _10_WindowsDesktop.WPF
     public partial class MainWindow : Window
     {
         private Point _previousLocation;
-        private Streamer.StreamerClient _client;
-        private AsyncDuplexStreamingCall<StreamRequest, StreamResponse> _duplexStream;
-        private string _clientId = $"{Guid.NewGuid()}";
+        private readonly AsyncDuplexStreamingCall<StreamRequest, StreamResponse> _duplexStream;
+        private readonly string _clientId = $"{Guid.NewGuid()}";
 
         public MainWindow()
         {
             InitializeComponent();
 
-            var channel = GrpcChannel.ForAddress("https://localhost:5001");
-            _client = new Streamer.StreamerClient(channel);
+            Thread.Sleep(5000);
 
-            _duplexStream = _client.Do(new CallOptions());
+            var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var client = new Streamer.StreamerClient(channel);
+
+            _duplexStream = client.Do(new CallOptions());
+            _duplexStream.RequestStream.WriteAsync(new StreamRequest { ClientId = _clientId });
         }
 
         private async void MainWindow_OnLoaded(object sender, RoutedEventArgs e)

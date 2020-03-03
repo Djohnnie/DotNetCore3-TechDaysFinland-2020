@@ -25,7 +25,7 @@ namespace _02_SingleFileExecutables
                 ForegroundColor = fi.Extension == ".exe" || fi.Extension == ".dll"
                     ? ConsoleColor.Yellow
                     : ConsoleColor.White;
-                WriteLine(fi.Name);
+                WriteLine($"{fi.Name} ({fi.Length:N0})");
             }
 
             ReadKey();

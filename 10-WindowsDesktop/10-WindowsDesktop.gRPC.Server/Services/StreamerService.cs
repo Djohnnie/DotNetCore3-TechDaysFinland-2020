@@ -20,7 +20,8 @@ namespace _10_WindowsDesktop.gRPC.Server
 
         public override async Task Do(
             IAsyncStreamReader<StreamRequest> requestStream,
-            IServerStreamWriter<StreamResponse> responseStream, ServerCallContext context)
+            IServerStreamWriter<StreamResponse> responseStream, 
+            ServerCallContext context)
         {
             if (!await requestStream.MoveNext())
                 return;

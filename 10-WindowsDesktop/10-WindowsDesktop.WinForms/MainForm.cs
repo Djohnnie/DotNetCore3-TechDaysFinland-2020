@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using _10_WindowsDesktop.gRPC.Contract;
 using Grpc.Core;
@@ -11,13 +12,14 @@ namespace _10_WindowsDesktop.WinForms
     {
         private readonly PictureBox _draggableBox = new PictureBox();
         private Point _previousLocation;
-        private Streamer.StreamerClient _client;
-        private AsyncDuplexStreamingCall<StreamRequest, StreamResponse> _duplexStream;
-        private string _clientId = $"{Guid.NewGuid()}";
+        private readonly AsyncDuplexStreamingCall<StreamRequest, StreamResponse> _duplexStream;
+        private readonly string _clientId = $"{Guid.NewGuid()}";
 
         public MainForm()
         {
             InitializeComponent();
+
+            Thread.Sleep(5000);
 
             _draggableBox.Left = 10;
             _draggableBox.Top = 10;
@@ -30,14 +32,10 @@ namespace _10_WindowsDesktop.WinForms
             Load += MainForm_Load;
 
             var channel = GrpcChannel.ForAddress("https://localhost:5001");
-            _client = new Streamer.StreamerClient(channel);
+            var client = new Streamer.StreamerClient(channel);
 
-            _duplexStream = _client.Do(new CallOptions());
-        }
-
-        private void _draggableBox_MouseDown(object sender, MouseEventArgs e)
-        {
-            throw new NotImplementedException();
+            _duplexStream = client.Do(new CallOptions());
+            _duplexStream.RequestStream.WriteAsync(new StreamRequest { ClientId = _clientId });
         }
 
         private async void MainForm_Load(object sender, System.EventArgs e)

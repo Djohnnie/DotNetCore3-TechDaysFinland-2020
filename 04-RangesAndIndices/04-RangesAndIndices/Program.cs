@@ -22,18 +22,18 @@ namespace _04_RangesAndIndices
 
             int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-            WriteLine(string.Join(",", numbers));
-            WriteLine(string.Join(",", numbers[index1]));
-            WriteLine(string.Join(",", numbers[index2]));
-            WriteLine(string.Join(",", numbers[range]));
+            WriteLine($"numbers: {string.Join(",", numbers)}");
+            WriteLine($"[index1]: {string.Join(",", numbers[index1])}");
+            WriteLine($"[index2]: {string.Join(",", numbers[index2])}");
+            WriteLine($"[range]: {string.Join(",", numbers[range])}");
             WriteLine();
-            WriteLine(string.Join(",", numbers));
-            WriteLine(string.Join(",", numbers[1]));
-            WriteLine(string.Join(",", numbers[^1]));
-            WriteLine(string.Join(",", numbers[1..5]));
-            WriteLine(string.Join(",", numbers[3..]));
-            WriteLine(string.Join(",", numbers[..5]));
-            WriteLine(string.Join(",", numbers[1..^1]));
+            WriteLine($"numbers: {string.Join(",", numbers)}");
+            WriteLine($"[1]: {string.Join(",", numbers[1])}");
+            WriteLine($"[^1]: {string.Join(",", numbers[^1])}");
+            WriteLine($"[1..5]: {string.Join(",", numbers[1..5])}");
+            WriteLine($"[3..]: {string.Join(",", numbers[3..])}");
+            WriteLine($"[..5]: {string.Join(",", numbers[..5])}");
+            WriteLine($"[1..^1]: {string.Join(",", numbers[1..^1])}");
         }
     }
 }

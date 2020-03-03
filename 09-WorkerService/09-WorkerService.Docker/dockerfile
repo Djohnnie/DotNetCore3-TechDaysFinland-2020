@@ -9,4 +9,4 @@ COPY bin/Release/publish /app
 ENV TZ=Europe/Brussels
 
 # Start the app
-ENTRYPOINT ["dotnet", "11-WorkerService.Docker.dll"]
+ENTRYPOINT ["dotnet", "09-WorkerService.Docker.dll"]

@@ -22,7 +22,7 @@ namespace _01_DefaultExecutables.Common
                 ForegroundColor = fi.Extension == ".exe" || fi.Extension == ".dll"
                     ? ConsoleColor.Yellow
                     : ConsoleColor.White;
-                WriteLine(fi.Name);
+                WriteLine($"{fi.Name} ({fi.Length:N0})");
             }
 
             ReadKey();
